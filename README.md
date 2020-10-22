@@ -12,4 +12,4 @@ Also provide you the list of sent , bounce and rejected email's.</p>
  <h3> <b>  WHERE CAN I GET THE LATEST RELEASE? </b></h3> 
 <p> You find our latest releases on our <a href="https://github.com/NASMAK-Technologies/moodle-block_aws_email_analytics"> github repository </a>.</p>
 <h3> <b> License </b></h3>
-<p> Code is under the <a href="https://github.com/NASMAK-Technologies/moodle-block_aws_email_analytics/licence"> GNU GENERAL PUBLIC LICENSE v3 </a>.</p>
+<p> Code is under the <a href="https://github.com/NASMAK-Technologies/moodle-block_aws_email_analytics/LICENSE"> GNU GENERAL PUBLIC LICENSE v3 </a>.</p>
