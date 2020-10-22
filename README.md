@@ -1,7 +1,7 @@
-# Aws Email Analytics moodle plugin
-<p> Aws email analytics is block type plugin which provide you the Aws email statics. 
-it shows the total number of deliver , bounce and rejected email.
-Also provide you the list of sent , bounce and rejected email's.</p>
+# AWS Email Analytics Moodle Plugin
+<p> AWS email analytics is a block type plugin which provides you the AWS email statistics. 
+It shows the total number of deliveries, bounce, and rejected emails.
+It also provides you a list of sent, bounced, and rejected emails.</p>
 
 <h3> <b> INSTALLATION </b></h3> 
 <ul>
