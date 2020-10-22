@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/aws_email_analytics/db" VERSION="20150427" COMMENT="XMLDB file for Moodle blocks/aws_email_analytics"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="blocks_analytics" COMMENT="Default comment for block_analytics, Access Creadentials">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="access_key" TYPE="text" LENGTH="500" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="secret_key" TYPE="text" LENGTH="500" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="region" TYPE="text" LENGTH="500" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="version" TYPE="text" LENGTH="500" NOTNULL="false" SEQUENCE="false"/>
+		<FIELD NAME="protocle" TYPE="text" LENGTH="500" NOTNULL="false" SEQUENCE="false"/>
+		<FIELD NAME="topic" TYPE="text" LENGTH="500" NOTNULL="false" SEQUENCE="false"/>
+		<FIELD NAME="subscription_status" TYPE="text" LENGTH="500" NOTNULL="false" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        
+      </KEYS>
+    </TABLE>
+	<TABLE NAME="blocks_email_logs" COMMENT="Default comment for block_analytics, Access Creadentials">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="notificationtype" TYPE="text" LENGTH="500" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timestamp" TYPE="text" LENGTH="500" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="source" TYPE="text" LENGTH="500" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="sourceip" TYPE="text" LENGTH="500" NOTNULL="false" SEQUENCE="false"/>
+		<FIELD NAME="destination" TYPE="text" LENGTH="500" NOTNULL="false" SEQUENCE="false"/>
+		<FIELD NAME="user_id" TYPE="text" LENGTH="500" NOTNULL="false" SEQUENCE="false"/>
+		<FIELD NAME="date" TYPE="text" LENGTH="500" NOTNULL="false" SEQUENCE="false"/>
+		
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
