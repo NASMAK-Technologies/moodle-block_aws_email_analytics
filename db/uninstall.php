@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package local_bbliveusers
- * @author Bruno Magalhães <brunomagalhaes@blackbean.com.br>
- * @copyright BlackBean Technologies Ltda <https://www.blackbean.com.br>
- * @license http://www.gnu.org/copyleft/gpl.html
+ * This file contains the Aws Email Analytics block.
+ *
+ * @package    block_aws_email_analytics
+ * @copyright  2018 onwards Nasmak Technologies
+ (https://www.nasmak.com.au/)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || exit(0);
 require_once(dirname(__FILE__).'/../lib.php');
