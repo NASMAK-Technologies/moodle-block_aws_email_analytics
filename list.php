@@ -1,28 +1,4 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
-//
-// Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Moodle is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * This file contains the Aws Email Analytics block.
- *
- * @package    block_aws_email_analytics
- * @copyright  2018 onwards Nasmak Technologies
- (https://www.nasmak.com.au/)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
- 
 require_once('../../config.php');
 require_once($CFG->libdir.'/coursecatlib.php');
 require_once($CFG->dirroot.'/blocks/aws_email_analytics/lib.php');
@@ -377,10 +353,10 @@ $systemcontext = context_system::instance();
 
             // delete button
             if (has_capability('moodle/user:delete', $sitecontext)) {
-                if (is_mnet_remote_user($user) or $user->id == $USER->id or is_siteadmin($user)) {
+                if (is_mnet_remote_user($user) or $user->user_id == $USER->id or is_siteadmin($user)) {
                     // no deleting of self, mnet accounts or admins allowed
                 } else {
-                    $url = new moodle_url($returnurl, array('delete'=>$user->id, 'sesskey'=>sesskey()));
+                    $url = new moodle_url($returnurl, array('delete'=>$user->user_id, 'sesskey'=>sesskey()));
                     $buttons[] = html_writer::link($url, $OUTPUT->pix_icon('t/delete', $strdelete));
                 }
             }
@@ -394,23 +370,23 @@ $systemcontext = context_system::instance();
                         $accessctrl = $acl->accessctrl;
                     }
                     $changeaccessto = ($accessctrl == 'deny' ? 'allow' : 'deny');
-                    $buttons[] = " (<a href=\"?acl={$user->id}&amp;accessctrl=$changeaccessto&amp;sesskey=".sesskey()."\">".get_string($changeaccessto, 'mnet') . " access</a>)";
+                    $buttons[] = " (<a href=\"?acl={$user->user_id}&amp;accessctrl=$changeaccessto&amp;sesskey=".sesskey()."\">".get_string($changeaccessto, 'mnet') . " access</a>)";
 
                 } else {
                     if ($user->suspended) {
-                        $url = new moodle_url($returnurl, array('unsuspend'=>$user->id, 'sesskey'=>sesskey()));
+                        $url = new moodle_url($returnurl, array('unsuspend'=>$user->user_id, 'sesskey'=>sesskey()));
                         $buttons[] = html_writer::link($url, $OUTPUT->pix_icon('t/show', $strunsuspend));
                     } else {
-                        if ($user->id == $USER->id or is_siteadmin($user)) {
+                        if ($user->user_id == $USER->id or is_siteadmin($user)) {
                             // no suspending of admins or self!
                         } else {
-                            $url = new moodle_url($returnurl, array('suspend'=>$user->id, 'sesskey'=>sesskey()));
+                            $url = new moodle_url($returnurl, array('suspend'=>$user->user_id, 'sesskey'=>sesskey()));
                             $buttons[] = html_writer::link($url, $OUTPUT->pix_icon('t/hide', $strsuspend));
                         }
                     }
 
                     if (login_is_lockedout($user)) {
-                        $url = new moodle_url($returnurl, array('unlock'=>$user->id, 'sesskey'=>sesskey()));
+                        $url = new moodle_url($returnurl, array('unlock'=>$user->user_id, 'sesskey'=>sesskey()));
                         $buttons[] = html_writer::link($url, $OUTPUT->pix_icon('t/unlock', $strunlock));
                     }
                 }
@@ -420,7 +396,7 @@ $systemcontext = context_system::instance();
             if (has_capability('moodle/user:update', $sitecontext)) {
                 // prevent editing of admins by non-admins
                 if (is_siteadmin($USER) or !is_siteadmin($user)) {
-                    $url = new moodle_url('/user/editadvanced.php', array('id'=>$user->id, 'course'=>$site->id));
+                    $url = new moodle_url('/user/editadvanced.php', array('id'=>$user->user_id, 'course'=>$site->id));
                     $buttons[] = html_writer::link($url, $OUTPUT->pix_icon('t/edit', $stredit));
                 }
             }
@@ -436,14 +412,14 @@ $systemcontext = context_system::instance();
 
             } else if ($user->confirmed == 0) {
                 if (has_capability('moodle/user:update', $sitecontext)) {
-                    $lastcolumn = html_writer::link(new moodle_url($returnurl, array('confirmuser'=>$user->id, 'sesskey'=>sesskey())), $strconfirm);
+                    $lastcolumn = html_writer::link(new moodle_url($returnurl, array('confirmuser'=>$user->user_id, 'sesskey'=>sesskey())), $strconfirm);
                 } else {
                     $lastcolumn = "<span class=\"dimmed_text\">".get_string('confirm')."</span>";
                 }
 
                 $lastcolumn .= ' | ' . html_writer::link(new moodle_url($returnurl,
                     [
-                        'resendemail' => $user->id,
+                        'resendemail' => $user->user_id,
                         'sesskey' => sesskey()
                     ]
                 ), $strresendemail);
@@ -480,7 +456,7 @@ $systemcontext = context_system::instance();
 			}
 			$row[] = $rowStatus;
 			
-            $row[] = "<a href=\"../user/view.php?id=$user->id&amp;course=$site->id\">$fullname</a>";
+            $row[] = "<a href=\"../../user/view.php?id=$user->user_id&amp;course=$site->id\">$fullname</a>";
             foreach ($extracolumns as $field) {
                 $row[] = s($user->{$field});
             }

@@ -9,6 +9,19 @@ It also provides you a list of sent, bounced, and rejected emails.</p>
  <li> After installing the Plugins in short you have to complete the configration by providing your aws creadentials and region and topic detail.</li>
   <li> when configration is successfully done you can see the aws email statics on your dashbaord where you add the block.</li>
 </ul>
+<h3> <b> WHAT'S REQUIRED </b></h3> 
+<ul>
+<li>Moodle vresion: 3.6 or greater</li>
+<li>Following aws account detail
+  <ol>
+     <li> Access key</li>
+     <li> Secret key</li>
+     <li> Region </li>
+     <li> Topic</li>
+  </ol>
+</li>
+
+</ul>
  <h3> <b>  WHERE CAN I GET THE LATEST RELEASE? </b></h3> 
 <p> You find our latest releases on our <a href="https://github.com/NASMAK-Technologies/moodle-block_aws_email_analytics"> github repository </a>.</p>
 <h3> <b> License </b></h3>

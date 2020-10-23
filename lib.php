@@ -1,28 +1,4 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
-//
-// Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// Moodle is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * This file contains the Aws Email Analytics block.
- *
- * @package    block_aws_email_analytics
- * @copyright  2018 onwards Nasmak Technologies
- (https://www.nasmak.com.au/)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
- 
 require_once($CFG->dirroot .'/config.php');
 require 'vendor/autoload.php';
 use Aws\Sns\SnsClient; 
@@ -71,10 +47,19 @@ function removeOneMonthLogs()
 	$today = date('Y-m-d');
 	$monthold = date('Y-m-d', strtotime('-30 days'));
 	
-	$result =  $DB->delete_records('blocks_email_logs', ['date' => $monthold]);
+	//$result =  $DB->delete_records('blocks_email_logs', ['date' => $monthold]);
+	$sql="select * from {blocks_email_logs} where date < '$monthold'";
+	$result = $DB->get_records_sql($sql);
+	if(!empty($result))
+	{
+		foreach($result as $data)
+		{
+			$DB->delete_records('blocks_email_logs', ['id' => $data->id]);
+		}
+	}
 	
-   
-    return $result;
+	 
+    return true;
 }
 
 function get_mail_users_listing($sort='lastaccess', $dir='ASC', $page=0, $recordsperpage=0,
@@ -147,7 +132,7 @@ function get_mail_users_listing($sort='lastaccess', $dir='ASC', $page=0, $record
 	// $data = $DB->get_records_sql("SELECT e.id , e.notificationtype , e.destination , u.firstname FROM mdl_blocks_email_logs as e LEFT OUTER JOIN mdl_user as u ON e.user_id = u.id WHERE u.id = 3
 // ");							  
     // warning: will return UNCONFIRMED USERS
-    $data =  $DB->get_records_sql("SELECT e.id, u.username, u.email, u.city, u.country, u.lastaccess, u.confirmed, u.mnethostid, u.suspended $extrafields ,e.notificationtype,e.timestamp
+    $data =  $DB->get_records_sql("SELECT e.id, u.username, u.email, u.city, u.country, u.lastaccess, u.confirmed, u.mnethostid, u.suspended $extrafields ,e.notificationtype,e.timestamp,u.id as user_id
 				   FROM mdl_blocks_email_logs as e
 				   LEFT OUTER JOIN  mdl_user as u    
 				   ON e.user_id = u.id   

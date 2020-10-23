@@ -52,6 +52,9 @@ class block_aws_email_analytics extends block_base {
     }
 	?>
     <style>
+	.card.dashboard-card {
+    max-height: 301px !important;
+    }
 	.analytic-img-set {
 		width:12%;
 		} 
